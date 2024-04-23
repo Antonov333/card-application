@@ -5,6 +5,6 @@ import java.util.Set;
 /**
  * Интерфейс для создания сущности информации о доступных средствах банковской карты
  */
-public interface AvailableFundsInfo {
-    Set<CardPropertyInfo> availableFunds();
+public interface AvailableFundsInfoInterface {
+    Set<? extends CardPropertyInfoInterface> availableFundsInfo(BankCard card);
 }
