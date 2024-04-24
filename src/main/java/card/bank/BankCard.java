@@ -1,26 +1,16 @@
 package card.bank;
 
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Сущность "Банковская карта"
  */
-public abstract class BankCard {
+public abstract class BankCard implements BankCardInterface {
 
     /**
      * Баланс
      */
-    private AtomicLong balance;
-
-    /**
-     * Геттер баланса карты
-     *
-     * @return баланс карты
-     */
-    public final AtomicLong getBalance() {
-        return balance;
-    }
+    private AtomicLong balance = new AtomicLong(0);
 
     /**
      * Пополнить карту
@@ -28,25 +18,34 @@ public abstract class BankCard {
      * В случае, если в метод будет передано отрицательное значение суммы пополнения,
      * выбрасывается исключение
      */
+    @Override
     public void topUp(long amount) {
-        if (amount < 0) {
-            throw new RuntimeException("Отрицательная сумма пополнения карты");
+        if (amount <= 0) {
+            throw new RuntimeException("Отрицательная или нулевая сумма пополнения карты");
         }
-        final long l = balance.getAndAdd(amount);
+        balance.getAndAdd(amount);
     }
 
     /**
      * Оплатить
+     * @param amount сумма платежа, должна быть положительная, иначе выбрасывается исключение
+     * @return всегда true, сумма платежа списывается с карты, даже если баланс отрицательный
      */
-    public abstract boolean pay(long amount);
+    @Override
+    public boolean pay(long amount) {
+        if (amount <= 0) {
+            throw new RuntimeException("Отрицательная или нулевая сумма платежа");
+        }
+        balance.addAndGet(-amount);
+        return true;
+    }
 
     /**
      * Получить информацию о балансе
      */
-    public abstract BalanceInfo balanceInfo();
+    @Override
+    public BalanceInfo balanceInfo() {
+        return CardAppInstanceFactory.getBalanceInfo(balance.get());
+    }
 
-    /**
-     * Получить информацию о доступных средствах
-     */
-    public abstract <T extends AvailableFundsInfoInterface> Set<T> availableFundsInfo();
 }

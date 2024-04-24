@@ -1,13 +1,9 @@
 package card.bank;
 
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.List;
 
-import static card.bank.CardAppInstanceFactory.getBalanceInfo;
+public class DebitCard extends BankCard implements BankCardInterface {
 
-public class DebitCard extends BankCard {
-
-    private AtomicLong ownFunds;
 
     /**
      * Пополнить карту
@@ -21,12 +17,15 @@ public class DebitCard extends BankCard {
 
     /**
      * Оплатить
-     *
-     * @param amount Сумма платежа
+     * @param amount сумма платежа, должна быть положительная, иначе выбрасывается исключение
+     * @return true, если средств достаточно для платежа. При недостатке средств возвращается false
      */
     @Override
     public boolean pay(long amount) {
-        return false;
+        if (amount > balanceInfo().amount()) {
+            return false;
+        }
+        return super.pay(amount);
     }
 
     /**
@@ -34,18 +33,15 @@ public class DebitCard extends BankCard {
      */
     @Override
     public BalanceInfo balanceInfo() {
-        return getBalanceInfo(getBalance().get());
+        return super.balanceInfo();
     }
 
     /**
      * Получить информацию о доступных средствах
      */
     @Override
-    public Set<? extends CardPropertyInfoInterface> availableFundsInfo() {
+    public List<? extends CardPropertyInfoInterface> availableFundsInfo() {
         DebitCardAvailableFundsInfo debitCardAvailableFundsInfo = new DebitCardAvailableFundsInfo();
-        Set<BalanceInfo> set = Set.of(getBalanceInfo(balanceInfo().amount()));
-        return set;
+        return List.of(super.balanceInfo());
     }
-
-
 }
