@@ -3,7 +3,7 @@ package card.bank;
 /**
  * Информация о балансе
  */
-public class BalanceInfo extends CardPropertyInfo implements CardPropertyInfoInterface {
+public class BalanceInfo extends CardPropertyInfo<Long> implements CardPropertyInfoInterface<Long> {
 
     private final long amount;
 
@@ -26,7 +26,7 @@ public class BalanceInfo extends CardPropertyInfo implements CardPropertyInfoInt
      * @return баланс карты
      */
     @Override
-    public long amount() {
+    public Long amount() {
         return amount;
     }
 }

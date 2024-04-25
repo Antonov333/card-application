@@ -54,7 +54,7 @@ public class CreditCard extends BankCard implements BankCardInterface {
      * Получить информацию о доступных средствах
      */
     @Override
-    public List<? extends CardPropertyInfoInterface> availableFundsInfo() {
+    public List<? extends CardPropertyInfoInterface<? extends Number>> availableFundsInfo() {
         long balance = balanceInfo().amount();
         long ownFunds = Math.max(0, balance);
         long creditFunds = Math.min(creditLimit, creditLimit + balance);

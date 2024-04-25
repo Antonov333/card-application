@@ -3,7 +3,7 @@ package card.bank;
 /**
  * Информация о кредитном лимите банковской карты
  */
-public class CreditLimitInfo extends CardPropertyInfo implements CardPropertyInfoInterface {
+public class CreditLimitInfo extends CardPropertyInfo<Long> {
 
     private final long creditLimit;
 
@@ -23,7 +23,7 @@ public class CreditLimitInfo extends CardPropertyInfo implements CardPropertyInf
      * @return значение кредитного лимита
      */
     @Override
-    public long amount() {
+    public Long amount() {
         return creditLimit;
     }
 }

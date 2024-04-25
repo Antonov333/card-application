@@ -3,8 +3,9 @@ package card.bank;
 /**
  * Интерфейс для создания сущности информации о свойстве банковской карты
  */
-public interface CardPropertyInfoInterface {
+public interface CardPropertyInfoInterface<N extends Number> {
     String name();
 
-    long amount();
+    N amount();
+
 }

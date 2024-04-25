@@ -41,7 +41,6 @@ public class DebitCard extends BankCard implements BankCardInterface {
      */
     @Override
     public List<? extends CardPropertyInfoInterface> availableFundsInfo() {
-        DebitCardAvailableFundsInfo debitCardAvailableFundsInfo = new DebitCardAvailableFundsInfo();
         return List.of(super.balanceInfo());
     }
 }

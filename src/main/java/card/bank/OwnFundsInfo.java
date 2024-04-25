@@ -3,9 +3,9 @@ package card.bank;
 /**
  * Иноформация о собственных средствах карты
  */
-public class OwnFundsInfo extends CardPropertyInfo implements CardPropertyInfoInterface {
+public class OwnFundsInfo extends CardPropertyInfo<Long> {
 
-    private long amount;
+    private final long amount;
 
     /**
      * @return строка "Собственные средства"
@@ -20,10 +20,10 @@ public class OwnFundsInfo extends CardPropertyInfo implements CardPropertyInfoIn
     }
 
     /**
-     * @return
+     * @return сумма собственных средств
      */
     @Override
-    public long amount() {
+    public Long amount() {
         return amount;
     }
 }

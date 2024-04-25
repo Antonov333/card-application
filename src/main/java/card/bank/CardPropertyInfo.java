@@ -1,22 +1,21 @@
 package card.bank;
 
-public abstract class CardPropertyInfo implements CardPropertyInfoInterface {
+/**
+ * Информация о свойстве банковской карты
+ */
+public abstract class CardPropertyInfo<N extends Number> implements CardPropertyInfoInterface<N> {
 
     /**
-     * @return
+     * @return имя свойства
      */
     @Override
-    public String name() {
-        return "";
-    }
+    public abstract String name();
 
     /**
-     * @return
+     * @return количество свойства
      */
     @Override
-    public long amount() {
-        return 0;
-    }
+    public abstract N amount();
 
     @Override
     public String toString() {

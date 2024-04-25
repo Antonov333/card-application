@@ -3,7 +3,7 @@ package card.bank;
 /**
  * Информация о кредитных средствах карты
  */
-public class CreditFundsInfo extends CardPropertyInfo implements CardPropertyInfoInterface {
+public class CreditFundsInfo extends CardPropertyInfo<Long> {
 
     private final long creditFunds;
 
@@ -20,10 +20,10 @@ public class CreditFundsInfo extends CardPropertyInfo implements CardPropertyInf
     }
 
     /**
-     * @return
+     * @return сумма доступных кредитных средств
      */
     @Override
-    public long amount() {
+    public Long amount() {
         return creditFunds;
     }
 }

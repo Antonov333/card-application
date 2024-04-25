@@ -21,7 +21,12 @@ public class Main {
 
         creditCard.pay(60000);
         printCardProperties(creditCard);
-        System.out.println(creditCard.balanceInfo());
 
+
+        ExtendedDebitCardBuilder builder = new ExtendedDebitCardBuilder();
+        ExtendedDebitCard extendedDebitCard = builder.bonusRate(0.01F).
+                cashBackRate(0.005F).
+                savingRate(0.0005F).build();
+        printCardProperties(extendedDebitCard);
     }
 }

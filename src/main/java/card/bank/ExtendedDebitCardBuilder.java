@@ -3,6 +3,7 @@ package card.bank;
 public class ExtendedDebitCardBuilder {
     private float bonusRate;
     private float cashBackRate;
+    private long minPmtAmountForCashBack;
     private float savingRate;
 
     public float getBonusRate() {
@@ -28,7 +29,20 @@ public class ExtendedDebitCardBuilder {
         return this;
     }
 
+    public ExtendedDebitCardBuilder minPmtAmountForCashBack(long minPmtAmountForCashBack) {
+        this.minPmtAmountForCashBack = minPmtAmountForCashBack;
+        return this;
+    }
+
     public ExtendedDebitCard build() {
         return new ExtendedDebitCard(this);
+    }
+
+    public float getCashBackRate() {
+        return cashBackRate;
+    }
+
+    public long getMinPmtAmountForCashBack() {
+        return minPmtAmountForCashBack;
     }
 }
