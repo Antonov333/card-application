@@ -1,4 +1,4 @@
-package card.bank;
+package card.bank.cards;
 
 public class ExtendedDebitCardBuilder {
     private float bonusRate;

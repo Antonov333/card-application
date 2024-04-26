@@ -1,13 +1,13 @@
-package card.bank;
+package card.bank.info;
 
 /**
  * Информация о кредитных средствах карты
  */
-public class CreditFundsInfo extends CardPropertyInfo<Long> {
+public final class CreditFundsInfo extends CardPropertyInfo<Long> {
 
     private final long creditFunds;
 
-    CreditFundsInfo(long creditFunds) {
+    public CreditFundsInfo(long creditFunds) {
         this.creditFunds = creditFunds;
     }
 

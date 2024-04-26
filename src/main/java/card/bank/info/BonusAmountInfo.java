@@ -1,8 +1,6 @@
 package card.bank.info;
 
-import card.bank.CardPropertyInfo;
-
-public class BonusAmountInfo extends CardPropertyInfo<Float> {
+public final class BonusAmountInfo extends CardPropertyInfo<Float> {
 
     private final float bonusAmount;
 
@@ -23,6 +21,6 @@ public class BonusAmountInfo extends CardPropertyInfo<Float> {
      */
     @Override
     public Float amount() {
-        return Float.valueOf(bonusAmount);
+        return bonusAmount;
     }
 }

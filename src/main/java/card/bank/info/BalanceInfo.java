@@ -1,4 +1,4 @@
-package card.bank;
+package card.bank.info;
 
 /**
  * Информация о балансе
@@ -7,7 +7,7 @@ public class BalanceInfo extends CardPropertyInfo<Long> implements CardPropertyI
 
     private final long amount;
 
-    BalanceInfo(long amount) {
+    public BalanceInfo(long amount) {
         this.amount = amount;
     }
 

@@ -1,15 +1,13 @@
-package card.bank;
+package card.bank.cards;
 
-import card.bank.info.BonusAmountInfo;
-import card.bank.info.BonusRateInfo;
-import card.bank.info.CashBackRateInfo;
+import card.bank.info.*;
 
 /**
  * Фабрика экземпляров объектов, используемых в приложении
  */
 public class CardAppInstanceFactory {
 
-    static final String debitClassName = DebitCard.class.toString();
+    public static final float oneHundredth = 0.01f;
 
     public static BalanceInfo getBalanceInfo(Long balanceValue) {
         return new BalanceInfo(balanceValue);
@@ -21,6 +19,7 @@ public class CardAppInstanceFactory {
      */
     public static OwnFundsInfo getOwnFundsInfo(long ownFundsAmount) {
         return new OwnFundsInfo(ownFundsAmount);
+
     }
 
     public static CreditLimitInfo getCreditLimitInfo(long creditLimit) {
@@ -33,7 +32,7 @@ public class CardAppInstanceFactory {
 
     public static <B extends BankCardInterface> void printCardProperties(B bankCard) {
         System.out.println(getCardCategory(bankCard));
-        bankCard.availableFundsInfo().stream().forEach(System.out::println);
+        bankCard.availableFundsInfo().forEach(System.out::println);
         System.out.println();
     }
 
@@ -45,10 +44,15 @@ public class CardAppInstanceFactory {
      * @return название банковской карты
      */
     public static <B extends BankCardInterface> String getCardCategory(B bankCard) {
+
+        Class<? extends BankCardInterface> cardClass = bankCard.getClass();
         if (DebitCard.class.equals(bankCard.getClass())) return "Дебетовая банковская карта";
         if (CreditCard.class.equals(bankCard.getClass())) return "Кредитная банковская карта";
         if (ExtendedDebitCard.class.equals(bankCard.getClass()))
             return "Дебетовая банковская карта с бонусом, кэшбеком и накоплением";
+        if (ExtendedCreditCard.class.equals(cardClass)) {
+            return "Кредитная банковская карта с бонусом, кэшбеком и накоплением";
+        }
         return "Неизвестная банковская карта";
     }
 
@@ -56,12 +60,25 @@ public class CardAppInstanceFactory {
         return new BonusRateInfo(bonusRate);
     }
 
-    public static BonusAmountInfo getBonusAmount(float bonusAmount) {
+    public static BonusAmountInfo getBonusAmountInfo(float bonusAmount) {
         return new BonusAmountInfo(bonusAmount);
     }
 
+    /**
+     * @param cashBackRate сумма накопленного кэшбэка
+     * @return экземпляр сущности информации о размере кэшбэка
+     */
     public static CashBackRateInfo getCashBackRateInfo(float cashBackRate) {
         return new CashBackRateInfo(cashBackRate);
     }
+
+    /**
+     * @param minPmtAmountForCashBack минимальная сумма платежа для начисления кэшбэка
+     * @return экземпляр сущности информации о минимальной сумме платежа для начисления кэшбэка
+     */
+    public static MinPmtAmountForCashBackInfo getMinPmtAmountForCashBackInfo(long minPmtAmountForCashBack) {
+        return MinPmtAmountForCashBackInfo.getInstance(minPmtAmountForCashBack);
+    }
+
 }
 

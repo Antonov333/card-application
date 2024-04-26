@@ -1,4 +1,6 @@
-package card.bank;
+package card.bank.cards;
+
+import card.bank.info.BalanceInfo;
 
 import java.util.concurrent.atomic.AtomicLong;
 

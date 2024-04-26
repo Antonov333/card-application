@@ -1,7 +1,5 @@
 package card.bank.info;
 
-import card.bank.CardPropertyInfo;
-
 /**
  * Информация о размере бонуса, начисляемого на сумму покупки
  */
@@ -19,7 +17,7 @@ public final class BonusRateInfo extends CardPropertyInfo<Float> {
      */
     @Override
     public String name() {
-        return "Размер бонуса";
+        return "Размер бонуса (%)";
     }
 
     /**

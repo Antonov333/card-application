@@ -1,8 +1,6 @@
 package card.bank.info;
 
-import card.bank.CardPropertyInfo;
-
-public class CashBackRateInfo extends CardPropertyInfo<Float> {
+public final class CashBackRateInfo extends CardPropertyInfo<Float> {
 
     private final float cashBackRate;
 

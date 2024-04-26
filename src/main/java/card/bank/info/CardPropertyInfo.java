@@ -1,4 +1,4 @@
-package card.bank;
+package card.bank.info;
 
 /**
  * Информация о свойстве банковской карты

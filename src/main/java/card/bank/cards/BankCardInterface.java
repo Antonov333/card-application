@@ -1,4 +1,7 @@
-package card.bank;
+package card.bank.cards;
+
+import card.bank.info.BalanceInfo;
+import card.bank.info.CardPropertyInfoInterface;
 
 import java.util.List;
 
@@ -12,5 +15,5 @@ public interface BankCardInterface {
     /**
      * Получить информацию о доступных средствах
      */
-    List<? extends CardPropertyInfoInterface> availableFundsInfo();
+    List<? extends CardPropertyInfoInterface<? extends Number>> availableFundsInfo();
 }

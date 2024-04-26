@@ -1,8 +1,13 @@
-package card.bank;
+package card.bank.cards;
+
+import card.bank.info.BalanceInfo;
+import card.bank.info.CardPropertyInfoInterface;
+import card.bank.info.CreditFundsInfo;
+import card.bank.info.OwnFundsInfo;
 
 import java.util.List;
 
-import static card.bank.CardAppInstanceFactory.*;
+import static card.bank.cards.CardAppInstanceFactory.*;
 
 /**
  * <b>Сущность "Кредитная карта"</b><br>
@@ -13,10 +18,15 @@ public class CreditCard extends BankCard implements BankCardInterface {
 
     private long creditLimit;
 
-    // Кредитная часть = MIN(кредитный лимит + баланс, кредитный лимит)
-    //
     CreditCard(long creditLimit) {
         this.creditLimit = creditLimit;
+    }
+
+    CreditCard() {
+    }
+
+    public static CreditCard creditCard(long creditLimit) {
+        return new CreditCard(creditLimit);
     }
 
     /**
@@ -59,9 +69,22 @@ public class CreditCard extends BankCard implements BankCardInterface {
         long ownFunds = Math.max(0, balance);
         long creditFunds = Math.min(creditLimit, creditLimit + balance);
 
-        OwnFundsInfo ownFundsInfo = getOwnFundsInfo(ownFunds);
-        CreditFundsInfo creditFundsInfo = getCreditFundsInfo(creditFunds);
+        OwnFundsInfo ownFundsInfo = getOwnFundsInfo(getOwnFunds());
+        CreditFundsInfo creditFundsInfo = getCreditFundsInfo(getCreditFunds());
 
         return List.of(balanceInfo(), ownFundsInfo, creditFundsInfo, getCreditLimitInfo(creditLimit));
     }
+
+    public long getCreditLimit() {
+        return creditLimit;
+    }
+
+    public long getCreditFunds() {
+        return Math.min(creditLimit, creditLimit + balanceInfo().amount());
+    }
+
+    public long getOwnFunds() {
+        return Math.max(0, balanceInfo().amount());
+    }
+
 }

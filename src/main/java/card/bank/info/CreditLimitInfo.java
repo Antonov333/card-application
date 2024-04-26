@@ -1,13 +1,13 @@
-package card.bank;
+package card.bank.info;
 
 /**
  * Информация о кредитном лимите банковской карты
  */
-public class CreditLimitInfo extends CardPropertyInfo<Long> {
+public final class CreditLimitInfo extends CardPropertyInfo<Long> {
 
     private final long creditLimit;
 
-    CreditLimitInfo(long creditLimit) {
+    public CreditLimitInfo(long creditLimit) {
         this.creditLimit = creditLimit;
     }
 

@@ -1,19 +1,17 @@
-package card.bank;
+package card.bank.cards;
 
-import card.bank.info.BonusAmountInfo;
-import card.bank.info.BonusRateInfo;
-import card.bank.info.CashBackRateInfo;
+import card.bank.info.*;
 
 import java.util.List;
 
-import static card.bank.CardAppInstanceFactory.getBonusRateInfo;
+import static card.bank.cards.CardAppInstanceFactory.*;
 
 /**
  * Премиальная дебетовая карта с бонусом, кэшбеком и накоплением
  */
 public class ExtendedDebitCard extends DebitCard {
     /**
-     * размер бонуса
+     * размер бонуса в процентах
      */
     private float bonusRate;
 
@@ -23,7 +21,7 @@ public class ExtendedDebitCard extends DebitCard {
     private float bonusAmount;
 
     /**
-     * размер кэшбэка
+     * размер кэшбэка процентах
      */
     private float cashBackRate;
 
@@ -38,7 +36,7 @@ public class ExtendedDebitCard extends DebitCard {
     private float cashBackAmount;
 
     /**
-     * Процент накопления
+     * Процент накопления в процентах
      */
     private float savingRate;
 
@@ -66,7 +64,7 @@ public class ExtendedDebitCard extends DebitCard {
     @Override
     public void topUp(long amount) {
         super.topUp(amount);
-        savingAmount += amount * savingRate;
+        savingAmount += amount * savingRate * oneHundredth;
     }
 
     /**
@@ -81,11 +79,11 @@ public class ExtendedDebitCard extends DebitCard {
         boolean result = super.pay(amount);
         if (result) {
             /* Рассчитываем бонус      */
-            bonusAmount += amount * bonusRate;
+            bonusAmount += amount * bonusRate * oneHundredth;
 
             /* Если сумма покупки достаточна, пополняем cashback */
             if (amount > minPmtAmountForCashBack) {
-                cashBackAmount += amount * cashBackRate;
+                cashBackAmount += amount * cashBackRate * oneHundredth;
             }
         }
         return result;
@@ -97,20 +95,25 @@ public class ExtendedDebitCard extends DebitCard {
      * процент кэшбэка и накопленную сумму кэшбэка,<br>
      * процент от суммы пополнений и накопленную сумму накоплений
      *
-     * @return список с перечисленными свойствами
+     * @return список с перечисленными выше свойствами
      */
     @Override
     public List<? extends CardPropertyInfoInterface<? extends Number>> availableFundsInfo() {
 
         BonusRateInfo bonusRateInfo = getBonusRateInfo(bonusRate);
-        BonusAmountInfo bonusAmountInfo = CardAppInstanceFactory.getBonusAmount(bonusAmount);
+        BonusAmountInfo bonusAmountInfo = getBonusAmountInfo(bonusAmount);
 
-        CashBackRateInfo cashBackRateInfo = CardAppInstanceFactory.getCashBackRateInfo(cashBackRate);
+        CashBackRateInfo cashBackRateInfo = getCashBackRateInfo(cashBackRate);
+        MinPmtAmountForCashBackInfo minPmtAmountForCashBackInfo = MinPmtAmountForCashBackInfo.getInstance(minPmtAmountForCashBack);
+        CashBackAmountInfo cashBackAmountInfo = CashBackAmountInfo.getInstance(cashBackAmount);
+
+        SavingRateInfo savingRateInfo = SavingRateInfo.savingRateInfo(savingRate);
+        SavingAmountInfo savingAmountInfo = SavingAmountInfo.savingAmountInfo(savingAmount);
 
         return List.of(balanceInfo(),
                 bonusRateInfo, bonusAmountInfo,
-                cashBackRateInfo
-                //TODO: доделать остальные свойства карты
+                cashBackRateInfo, cashBackAmountInfo, minPmtAmountForCashBackInfo,
+                savingRateInfo, savingAmountInfo
         );
     }
 }

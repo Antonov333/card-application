@@ -1,9 +1,9 @@
-package card.bank;
+package card.bank.info;
 
 /**
- * Иноформация о собственных средствах карты
+ * Иноформация о собственных средствах кредитной карты
  */
-public class OwnFundsInfo extends CardPropertyInfo<Long> {
+public final class OwnFundsInfo extends CardPropertyInfo<Long> {
 
     private final long amount;
 
@@ -15,7 +15,7 @@ public class OwnFundsInfo extends CardPropertyInfo<Long> {
         return "Собственные средства";
     }
 
-    OwnFundsInfo(long amount) {
+    public OwnFundsInfo(long amount) {
         this.amount = amount;
     }
 

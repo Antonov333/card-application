@@ -1,8 +1,11 @@
-package card.bank;
+package card.bank.cards;
+
+import card.bank.info.BalanceInfo;
+import card.bank.info.CardPropertyInfoInterface;
 
 import java.util.List;
 
-public class DebitCard extends BankCard implements BankCardInterface {
+public class DebitCard extends BankCard {
 
 
     /**
@@ -40,7 +43,7 @@ public class DebitCard extends BankCard implements BankCardInterface {
      * Получить информацию о доступных средствах
      */
     @Override
-    public List<? extends CardPropertyInfoInterface> availableFundsInfo() {
+    public List<? extends CardPropertyInfoInterface<? extends Number>> availableFundsInfo() {
         return List.of(super.balanceInfo());
     }
 }
