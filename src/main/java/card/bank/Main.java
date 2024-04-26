@@ -19,18 +19,14 @@ public class Main {
         printCardProperties(debitCard);
 
         toppingUp(debitCard, 10000);
-
         payment(debitCard, 3000);
-
         payment(debitCard, 8000);
 
         long l = 10000;
         CreditCard creditCard = CreditCard.creditCard(l);
         printMessage("Создана карта: " + getCardCategory(creditCard) + " c лимитом " + l);
         printCardProperties(creditCard);
-
         toppingUp(creditCard, 55000);
-
         payment(creditCard, 60000);
 
         ExtendedDebitCardBuilder builder = new ExtendedDebitCardBuilder();
@@ -40,11 +36,8 @@ public class Main {
                 savingRate(0.005F).build();
         printMessage("Создана карта: " + getCardCategory(extendedDebitCard));
         printCardProperties(extendedDebitCard);
-
         toppingUp(extendedDebitCard, 50000);
-
         payment(extendedDebitCard, 7000);
-
         payment(extendedDebitCard, 8000);
 
         ExtendedCreditCardBuilder extendedCreditCardBuilder = new ExtendedCreditCardBuilder();
@@ -57,15 +50,10 @@ public class Main {
         printMessage("Создана карта: " + getCardCategory(extendedCreditCard));
         printCardProperties(extendedCreditCard);
 
-
         toppingUp(extendedCreditCard, 7000);
-
         payment(extendedCreditCard, 3000);
-
         payment(extendedCreditCard, 10000);
-
         toppingUp(extendedCreditCard, 15000);
-
 
     }
 
@@ -77,11 +65,11 @@ public class Main {
         printMessage("Карта: " + getCardCategory(bankCard));
         boolean result = bankCard.pay(amount);
         if (result) {
-            printMessage("Оплата на " + amount);
+            printMessage("Произведена оплата на сумму " + amount);
         } else {
             printMessage("Недостаточно средств для оплаты на сумму " + amount);
-            printCardProperties(bankCard);
         }
+        printCardProperties(bankCard);
     }
 
     private static <B extends BankCard> void toppingUp(B bankCard, long amount) {

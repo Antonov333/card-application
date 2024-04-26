@@ -65,14 +65,13 @@ public class CreditCard extends BankCard implements BankCardInterface {
      */
     @Override
     public List<? extends CardPropertyInfoInterface<? extends Number>> availableFundsInfo() {
-        long balance = balanceInfo().amount();
-        long ownFunds = Math.max(0, balance);
-        long creditFunds = Math.min(creditLimit, creditLimit + balance);
-
         OwnFundsInfo ownFundsInfo = getOwnFundsInfo(getOwnFunds());
         CreditFundsInfo creditFundsInfo = getCreditFundsInfo(getCreditFunds());
 
-        return List.of(balanceInfo(), ownFundsInfo, creditFundsInfo, getCreditLimitInfo(creditLimit));
+        return List.of(balanceInfo(),
+                getOwnFundsInfo(getOwnFunds()),
+                getCreditFundsInfo(getCreditFunds()),
+                getCreditLimitInfo(creditLimit));
     }
 
     public long getCreditLimit() {

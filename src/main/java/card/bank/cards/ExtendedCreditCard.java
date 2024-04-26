@@ -80,6 +80,8 @@ public class ExtendedCreditCard extends CreditCard {
 
         BalanceInfo balanceInfo = getBalanceInfo(balanceInfo().amount());
 
+        OwnFundsInfo ownFundsInfo = getOwnFundsInfo(getOwnFunds());
+
         CreditLimitInfo creditLimitInfo = getCreditLimitInfo(getCreditLimit());
         CreditFundsInfo creditFundsInfo = getCreditFundsInfo(getCreditFunds());
 
@@ -95,6 +97,8 @@ public class ExtendedCreditCard extends CreditCard {
 
         return List.of(
                 balanceInfo,
+
+                ownFundsInfo,
 
                 creditFundsInfo,
                 creditLimitInfo,
