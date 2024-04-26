@@ -13,7 +13,7 @@ public class ExtendedDebitCard extends DebitCard {
     /**
      * размер бонуса в процентах
      */
-    private float bonusRate;
+    private final float bonusRate;
 
     /**
      * бонусные баллы
@@ -23,12 +23,12 @@ public class ExtendedDebitCard extends DebitCard {
     /**
      * размер кэшбэка процентах
      */
-    private float cashBackRate;
+    private final float cashBackRate;
 
     /**
      * минимальная сумма, на которую начисляется кэшбэк
      */
-    private long minPmtAmountForCashBack;
+    private final long minPmtAmountForCashBack;
 
     /**
      * накопленный кэшбэк
@@ -38,7 +38,7 @@ public class ExtendedDebitCard extends DebitCard {
     /**
      * Процент накопления в процентах
      */
-    private float savingRate;
+    private final float savingRate;
 
     /**
      * Общая сумма накоплений

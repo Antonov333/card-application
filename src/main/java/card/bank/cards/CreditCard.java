@@ -2,8 +2,6 @@ package card.bank.cards;
 
 import card.bank.info.BalanceInfo;
 import card.bank.info.CardPropertyInfoInterface;
-import card.bank.info.CreditFundsInfo;
-import card.bank.info.OwnFundsInfo;
 
 import java.util.List;
 
@@ -20,9 +18,6 @@ public class CreditCard extends BankCard implements BankCardInterface {
 
     CreditCard(long creditLimit) {
         this.creditLimit = creditLimit;
-    }
-
-    CreditCard() {
     }
 
     public static CreditCard creditCard(long creditLimit) {
@@ -65,9 +60,6 @@ public class CreditCard extends BankCard implements BankCardInterface {
      */
     @Override
     public List<? extends CardPropertyInfoInterface<? extends Number>> availableFundsInfo() {
-        OwnFundsInfo ownFundsInfo = getOwnFundsInfo(getOwnFunds());
-        CreditFundsInfo creditFundsInfo = getCreditFundsInfo(getCreditFunds());
-
         return List.of(balanceInfo(),
                 getOwnFundsInfo(getOwnFunds()),
                 getCreditFundsInfo(getCreditFunds()),

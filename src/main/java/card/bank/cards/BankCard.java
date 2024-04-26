@@ -12,7 +12,7 @@ public abstract class BankCard implements BankCardInterface {
     /**
      * Баланс
      */
-    private AtomicLong balance = new AtomicLong(0);
+    private final AtomicLong balance = new AtomicLong(0);
 
     /**
      * Пополнить карту

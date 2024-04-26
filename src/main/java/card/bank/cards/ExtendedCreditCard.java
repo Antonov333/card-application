@@ -11,10 +11,6 @@ import static card.bank.cards.CardAppInstanceFactory.*;
  */
 public class ExtendedCreditCard extends CreditCard {
 
-    ExtendedCreditCard(long creditLimit) {
-        super(creditLimit);
-    }
-
     /**
      * размер бонуса в процентах
      */
@@ -125,7 +121,7 @@ public class ExtendedCreditCard extends CreditCard {
 
     /**
      * @param amount сумма платежа, должна быть положительная, иначе выбрасывается исключение
-     * @return
+     * @return true, если платеж выполнен <br>false, если не хватает средств для выполнения платежа
      */
     @Override
     public boolean pay(long amount) {

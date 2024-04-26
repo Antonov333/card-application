@@ -7,7 +7,7 @@ public class ExtendedCreditCardBuilder {
 
     private long creditLimit;
 
-    private ExtendedDebitCardBuilder debitCardBuilder = new ExtendedDebitCardBuilder();
+    private final ExtendedDebitCardBuilder debitCardBuilder = new ExtendedDebitCardBuilder();
 
     public ExtendedCreditCardBuilder creditLimit(long creditLimit) {
         this.creditLimit = creditLimit;
