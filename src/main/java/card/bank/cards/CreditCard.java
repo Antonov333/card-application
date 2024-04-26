@@ -14,7 +14,7 @@ import static card.bank.cards.CardAppInstanceFactory.*;
  */
 public class CreditCard extends BankCard implements BankCardInterface {
 
-    private long creditLimit;
+    private final long creditLimit;
 
     CreditCard(long creditLimit) {
         this.creditLimit = creditLimit;
